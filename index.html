@@ -3,90 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alistamento Amigos do Blackjack</title>
+  <title>Recrutamento - Albion Online</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { background: radial-gradient(circle at center, #1a1c23 0%, #0d0e12 100%); }
-    .gold-border { border: 1px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.15); }
-    .gold-button { background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%); }
-  </style>
 </head>
-<body class="text-gray-200 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-900 text-gray-100 min-h-screen flex items-center justify-center p-4">
 
-  <div class="max-w-2xl w-full bg-gray-900/90 rounded-xl p-8 gold-border my-8">
-    <h1 class="text-3xl font-extrabold text-amber-400 text-center uppercase mb-6">⚔️ Recrutamento do Blackjack ⚔️</h1>
+  <div class="max-w-xl w-full bg-gray-800 rounded-xl shadow-2xl p-6 border border-gray-700">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold text-amber-400 mb-2">⚔️ Formulário de Recrutamento</h1>
+      <p class="text-gray-400 text-sm">Preencha seus dados para solicitar entrada na guilda</p>
+    </div>
 
-    <form id="recruitmentForm" class="space-y-6">
+    <form id="recruitmentForm" class="space-y-4">
       
-      <!-- Nicks -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-amber-400 font-bold mb-2 text-xs uppercase">Nick no Jogo</label>
-          <input type="text" id="gameNick" required placeholder="Ex: PlayerOne" class="w-full bg-gray-800 border border-gray-700 rounded p-3 text-white">
-        </div>
-        <div>
-          <label class="block text-amber-400 font-bold mb-2 text-xs uppercase">Username ou ID do Discord</label>
-          <input type="text" id="discordTag" required placeholder="Ex: eduardopython ou ID" class="w-full bg-gray-800 border border-gray-700 rounded p-3 text-white">
-        </div>
+      <!-- Nick no Jogo -->
+      <div>
+        <label class="block text-sm font-semibold mb-1 text-gray-300">Nick no Jogo (Albion):</label>
+        <input type="text" id="gameNick" required placeholder="Ex: PlayerOne"
+               class="w-full bg-gray-900 border border-gray-700 rounded p-3 text-white focus:outline-none focus:border-amber-400">
       </div>
 
-      <!-- Conteúdos para Cargos Automáticos -->
+      <!-- Tag / Nick no Discord -->
       <div>
-        <label class="block text-amber-400 font-bold mb-2 text-xs uppercase">Conteúdos Preferidos (Gera Cargos)</label>
-        <div class="grid grid-cols-2 gap-2">
-          <label class="bg-gray-800 p-3 rounded border border-gray-700 flex items-center space-x-2">
-            <input type="checkbox" name="roles" value="Ganking" class="accent-amber-400">
-            <span>Ganking</span>
-          </label>
-          <label class="bg-gray-800 p-3 rounded border border-gray-700 flex items-center space-x-2">
-            <input type="checkbox" name="roles" value="Guerra de Facção" class="accent-amber-400">
-            <span>Guerra de Facção</span>
-          </label>
-          <label class="bg-gray-800 p-3 rounded border border-gray-700 flex items-center space-x-2">
+        <label class="block text-sm font-semibold mb-1 text-gray-300">Seu Nick/Username do Discord ou ID:</label>
+        <input type="text" id="discordTag" required placeholder="Ex: eduardopython ou ID"
+               class="w-full bg-gray-900 border border-gray-700 rounded p-3 text-white focus:outline-none focus:border-amber-400">
+      </div>
+
+      <!-- Arma Principal -->
+      <div>
+        <label class="block text-sm font-semibold mb-1 text-gray-300">Arma Principal:</label>
+        <select id="mainWeapon" required class="w-full bg-gray-900 border border-gray-700 rounded p-3 text-white focus:outline-none focus:border-amber-400">
+          <option value="">Selecione a Arma...</option>
+          <optgroup label="Espadas">
+            <option value="Espada larga">Espada Larga</option>
+            <option value="Criadora de Reis">Criadora de Reis</option>
+            <option value="Lâmina Entalhada">Lâmina Entalhada</option>
+          </optgroup>
+          <optgroup label="Arcos">
+            <option value="Arco Badônico">Arco Badônico</option>
+            <option value="Arco Sussurrante">Arco Sussurrante</option>
+            <option value="Arco Longo">Arco Longo</option>
+          </optgroup>
+          <optgroup label="Machados">
+            <option value="Machadinha">Machadinha</option>
+            <option value="Pata de Urso">Pata de Urso</option>
+            <option value="Segadeira das Sombras">Segadeira das Sombras</option>
+          </optgroup>
+          <optgroup label="Cajados">
+            <option value="Cajado de Fogo">Cajado de Fogo</option>
+            <option value="Cajado Sagrado">Cajado Sagrado</option>
+            <option value="Cajado de Geada">Cajado de Geada</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <!-- Spec da Arma -->
+      <div>
+        <label class="block text-sm font-semibold mb-1 text-gray-300">Especialização (Spec) da Arma Principal:</label>
+        <input type="number" id="weaponSpec" min="0" max="120" required placeholder="Ex: 100"
+               class="w-full bg-gray-900 border border-gray-700 rounded p-3 text-white focus:outline-none focus:border-amber-400">
+      </div>
+
+      <!-- Conteúdos / Atividades (Checkboxes) -->
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300">Atividades de Interesse:</label>
+        <div class="grid grid-cols-2 gap-2 text-sm">
+          <label class="bg-gray-900 p-3 rounded border border-gray-700 flex items-center space-x-2 cursor-pointer hover:border-amber-400">
             <input type="checkbox" name="roles" value="ZvZ" class="accent-amber-400">
             <span>ZvZ</span>
           </label>
-          <label class="bg-gray-800 p-3 rounded border border-gray-700 flex items-center space-x-2">
+          <label class="bg-gray-900 p-3 rounded border border-gray-700 flex items-center space-x-2 cursor-pointer hover:border-amber-400">
+            <input type="checkbox" name="roles" value="Ganking" class="accent-amber-400">
+            <span>Ganking</span>
+          </label>
+          <label class="bg-gray-900 p-3 rounded border border-gray-700 flex items-center space-x-2 cursor-pointer hover:border-amber-400">
+            <input type="checkbox" name="roles" value="Guerra de Facção" class="accent-amber-400">
+            <span>Guerra de Facção</span>
+          </label>
+          <label class="bg-gray-900 p-3 rounded border border-gray-700 flex items-center space-x-2 cursor-pointer hover:border-amber-400">
             <input type="checkbox" name="roles" value="PvE / HCE" class="accent-amber-400">
             <span>PvE / HCE</span>
+          </label>
+          <label class="bg-gray-900 p-3 rounded border border-gray-700 flex items-center space-x-2 cursor-pointer hover:border-amber-400">
+            <input type="checkbox" name="roles" value="Coletor / Booster" class="accent-amber-400">
+            <span>Coletor / Booster</span>
           </label>
         </div>
       </div>
 
-      <!-- Seleção Direta de Armas -->
-      <div class="space-y-3">
-        <label class="block text-amber-400 font-bold text-xs uppercase">Sua Arma Principal</label>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <select id="mainWeapon" required class="bg-gray-800 border border-gray-700 rounded p-3 text-white">
-            <option value="">Selecione a Arma...</option>
-            <optgroup label="Arcos">
-              <option value="Arco Badônico">Arco Badônico</option>
-              <option value="Arco Sussurrante">Arco Sussurrante</option>
-              <option value="Arco Longo">Arco Longo</option>
-            </optgroup>
-            <optgroup label="Espadas">
-              <option value="Espada Larga">Espada Larga</option>
-              <option value="Criadora de Reis">Criadora de Reis</option>
-              <option value="Claidheamh Mór">Claidheamh Mór</option>
-            </optgroup>
-            <optgroup label="Cajados Cursados">
-              <option value="Cajado Malfazejo">Cajado Malfazejo</option>
-              <option value="Cajado da Sombra">Cajado da Sombra</option>
-            </optgroup>
-          </select>
-
-          <select id="weaponSpec" required class="bg-gray-800 border border-gray-700 rounded p-3 text-white">
-            <option value="">Nível de Espec...</option>
-            <option value="1 a 50">1 a 50 Espec</option>
-            <option value="50 a 99">50 a 99 Espec</option>
-            <option value="100/120">100 / 120 Espec</option>
-            <option value="120/120 (Full)">120 / 120 (Max)</option>
-          </select>
-        </div>
-      </div>
-
-      <button type="submit" id="submitBtn" class="w-full gold-button text-black font-black py-4 rounded uppercase tracking-wider transition-opacity duration-200 hover:opacity-90">
+      <!-- Botão de Enviar -->
+      <button type="submit" id="submitBtn"
+              class="w-full bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold py-3 rounded transition duration-200 shadow-lg mt-4">
         Enviar Para Análise ⚔️
       </button>
     </form>
@@ -102,6 +110,14 @@
       submitBtn.disabled = true;
       submitBtn.innerText = 'ENVIANDO APLICAÇÃO... ⏳';
 
+      // 1. Pega o ID da guilda vindo do link (ex: ?guild=123456789)
+      const urlParams = new URLSearchParams(window.location.search);
+      
+      // ⚠️ COLOQUE O ID DO SEU SERVIDOR PADRÃO DENTRO DAS ASPAS ABAIXO:
+      const DEFAULT_GUILD_ID = "SEU_ID_DO_SERVIDOR_AQUI"; 
+      
+      const guildId = urlParams.get('guild') || DEFAULT_GUILD_ID;
+
       const gameNick = document.getElementById('gameNick').value;
       const discordTag = document.getElementById('discordTag').value;
       const mainWeapon = document.getElementById('mainWeapon').value;
@@ -111,22 +127,26 @@
                                  .map(cb => cb.value);
 
       try {
-        const response = await fetch('https://bot-recrutador.onrender.com/api/apply', {
+        // ⚠️ Troque a URL abaixo pela sua URL exata do Render:
+        const response = await fetch('https://SUA-URL-DA-RENDER.onrender.com/api/apply', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json'
+          },
           body: JSON.stringify({
             gameNick,
             discordTag,
             roles: selectedRoles,
             mainWeapon,
-            weaponSpec
+            weaponSpec,
+            guildId: guildId
           })
         });
 
         const data = await response.json();
 
         if (response.ok) {
-          alert('✅ Aplicação enviada com sucesso!');
+          alert('✅ Aplicação enviada com sucesso! Aguarde a análise no Discord.');
           form.reset();
         } else {
           alert('❌ Ocorreu um erro: ' + (data.error || 'Erro desconhecido ao enviar.'));
@@ -140,6 +160,5 @@
       }
     });
   </script>
-
 </body>
 </html>
