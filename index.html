@@ -3,266 +3,429 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recrutamento - Albion Online</title>
+  <title>Bot Recrutador Albion - Automatize sua Guilda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
-      background: linear-gradient(135deg, #12131C 0%, #1A1C29 100%);
+      background-color: #0A0C10;
       color: #E2E8F0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .logo {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+    }
+
+    /* --- HERO COM VÍDEO DE FUNDO --- */
+    .hero {
+      position: relative;
+      width: 100%;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
       padding: 20px;
+      overflow: hidden;
+    }
+
+    .bg-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      filter: brightness(0.6) contrast(1.1);
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(10,12,16,0.6) 0%, rgba(10,12,16,0.95) 100%);
+      z-index: 2;
+    }
+
+    header {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #F1C40F;
+      text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 850px;
+      margin: auto 0;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(241, 196, 15, 0.15);
+      border: 1px solid #F1C40F;
+      color: #F1C40F;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.2rem;
+      color: #FFF;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.9);
+    }
+
+    .hero-content h1 span {
+      color: #F1C40F;
+      background: linear-gradient(180deg, #FFE600 0%, #D4AC0D 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #CBD5E1;
+      margin-bottom: 35px;
+      line-height: 1.6;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 16px 36px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #2ECC71 0%, #27AE60 100%);
+      color: #FFF;
+      border: 1px solid #2ECC71;
+      box-shadow: 0 4px 20px rgba(46, 204, 113, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 25px rgba(46, 204, 113, 0.6);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: #FFF;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #FFF;
+    }
+
+    /* --- RECURSOS (FEATURES) --- */
+    .features {
+      background: #10131A;
+      border-top: 2px solid #1E2330;
+      border-bottom: 2px solid #1E2330;
+      padding: 80px 20px;
     }
 
     .container {
-      background: #222636;
-      border: 1px solid #32384D;
-      border-radius: 12px;
-      padding: 30px;
-      width: 100%;
-      max-width: 500px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
-    h1 {
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
       color: #F1C40F;
-      font-size: 24px;
-      margin-bottom: 8px;
-      text-align: center;
+      margin-bottom: 50px;
+      text-transform: uppercase;
     }
 
-    p.subtitle {
-      color: #94A3B8;
-      font-size: 14px;
-      text-align: center;
-      margin-bottom: 24px;
+    .grid-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
     }
 
-    .form-group {
-      margin-bottom: 18px;
+    .feature-card {
+      background: #161A24;
+      border: 1px solid #2A3042;
+      border-radius: 10px;
+      padding: 30px;
+      transition: border-color 0.3s;
+      position: relative;
     }
 
-    label {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #CBD5E1;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    select {
-      width: 100%;
-      padding: 12px;
-      background: #1A1C29;
-      border: 1px solid #32384D;
-      border-radius: 6px;
-      color: #FFF;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    input:focus, select:focus {
+    .feature-card:hover {
       border-color: #F1C40F;
     }
 
-    .checkbox-group {
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      color: #FFF;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: #94A3B8;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* --- PREÇOS --- */
+    .pricing {
+      padding: 80px 20px;
+      background: #0A0C10;
+    }
+
+    .grid-pricing {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      background: #1A1C29;
-      padding: 12px;
-      border-radius: 6px;
-      border: 1px solid #32384D;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
+      gap: 30px;
+      justify-content: center;
     }
 
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-      font-size: 13px;
-      color: #CBD5E1;
-      cursor: pointer;
-    }
-
-    .checkbox-item input {
-      margin-right: 8px;
-      accent-color: #F1C40F;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      background: #F1C40F;
-      color: #12131C;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background: #D4AC0D;
-    }
-
-    button:active {
-      transform: scale(0.98);
-    }
-
-    .message-box {
-      padding: 12px;
-      border-radius: 6px;
-      font-size: 14px;
-      margin-top: 15px;
-      display: none;
+    .price-card {
+      background: #141722;
+      border: 2px solid #222736;
+      border-radius: 12px;
+      padding: 40px;
       text-align: center;
+      position: relative;
     }
 
-    .message-box.success {
-      background: rgba(46, 204, 113, 0.2);
-      border: 1px solid #2ECC71;
+    .price-card.featured {
+      border-color: #F1C40F;
+      box-shadow: 0 0 30px rgba(241, 196, 15, 0.15);
+      background: linear-gradient(180deg, #181C2B 0%, #121520 100%);
+    }
+
+    .price-badge {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #F1C40F;
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 900;
+      padding: 4px 16px;
+      border-radius: 12px;
+      text-transform: uppercase;
+    }
+
+    .price-card h3 {
+      font-size: 1.6rem;
+      color: #FFF;
+      margin-bottom: 15px;
+    }
+
+    .price-val {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #FFF;
+      margin-bottom: 20px;
+    }
+
+    .price-val span {
+      font-size: 1rem;
+      color: #94A3B8;
+      font-weight: normal;
+    }
+
+    .price-list {
+      list-style: none;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .price-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #222736;
+      color: #CBD5E1;
+      font-size: 0.95rem;
+    }
+
+    .price-list li::before {
+      content: "✓ ";
       color: #2ECC71;
+      font-weight: bold;
+      margin-right: 8px;
     }
 
-    .message-box.error {
-      background: rgba(231, 76, 60, 0.2);
-      border: 1px solid #E74C3C;
-      color: #E74C3C;
+    /* --- FOOTER --- */
+    footer {
+      background: #06070A;
+      padding: 40px 20px;
+      text-align: center;
+      color: #64748B;
+      font-size: 0.9rem;
+      border-top: 1px solid #161A24;
     }
 
-    .message-box.warning {
-      background: rgba(241, 196, 15, 0.2);
-      border: 1px solid #F1C40F;
-      color: #F1C40F;
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 2.2rem; }
+      .hero-content p { font-size: 1rem; }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>⚔️ Recrutamento de Guilda</h1>
-    <p class="subtitle">Preencha sua ficha para se candidatar à guilda</p>
+  <!-- HERO SECTION COM VÍDEO -->
+  <section class="hero">
+    <!-- Vídeo de ZvZ em loop -->
+    <video autoplay muted loop playsinline class="bg-video">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-game-animation-of-a-warrior-in-a-dungeon-43026-large.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+    
+    <div class="overlay"></div>
 
-    <div id="alertBox" class="message-box"></div>
+    <header>
+      <div class="logo">⚔️ RECRUTADOR ALBION</div>
+      <a href="#planos" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.85rem;">Ver Planos</a>
+    </header>
 
-    <form id="recruitForm">
-      <div class="form-group">
-        <label for="gameNick">Nick no Albion Online</label>
-        <input type="text" id="gameNick" placeholder="Ex: PlayerOne" required>
+    <div class="hero-content">
+      <span class="badge">SaaS para Guildas de Albion Online</span>
+      <h1>Domine o Recrutamento da sua <span>Guilda</span></h1>
+      <p>Receba fichas organizadas via formulário web, dê cargos automáticos no Discord com 1 clique e monte composições imbatíveis para suas ZvZs.</p>
+      
+      <div class="cta-group">
+        <a href="https://discord.com/oauth2/authorize?client_id=1531670595832516618&permissions=2416035856&integration_type=0&scope=bot+applications.commands" target="_blank" class="btn btn-primary">
+          ➕ Adicionar ao Discord
+        </a>
+        <a href="#recursos" class="btn btn-secondary">Conhecer Recursos</a>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="discordTag">Seu User no Discord</label>
-        <input type="text" id="discordTag" placeholder="Ex: usuario_discord" required>
-      </div>
+    <div></div>
+  </section>
 
-      <div class="form-group">
-        <label for="mainWeapon">Arma Principal</label>
-        <input type="text" id="mainWeapon" placeholder="Ex: Cajado Infernál, Espada Larga..." required>
-      </div>
+  <!-- RECURSOS -->
+  <section class="features" id="recursos">
+    <div class="container">
+      <h2 class="section-title">Construído para Líderes de Guilda</h2>
+      
+      <div class="grid-features">
+        <div class="feature-card">
+          <div class="feature-icon">📝</div>
+          <h3>Formulário Exclusivo</h3>
+          <p>Cada guilda ganha um link próprio. O candidato escolhe Nick, Arma, Spec e Atividades em uma tela limpa e intuitiva.</p>
+        </div>
 
-      <div class="form-group">
-        <label for="weaponSpec">Spec da Arma Principal (0 a 120)</label>
-        <input type="number" id="weaponSpec" min="0" max="120" placeholder="Ex: 100" required>
-      </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Cargos Instantâneos</h3>
+          <p>Aprove o membro direto no Discord com botão de 1 clique. O bot atribui os cargos das funções (ZvZ, Tank, Healer, etc.) sozinho.</p>
+        </div>
 
-      <div class="form-group">
-        <label>Atividades de Interesse</label>
-        <div class="checkbox-group">
-          <label class="checkbox-item"><input type="checkbox" name="roles" value="ZvZ"> ZvZ</label>
-          <label class="checkbox-item"><input type="checkbox" name="roles" value="Gank"> Gank</label>
-          <label class="checkbox-item"><input type="checkbox" name="roles" value="PvE / DG"> PvE / DG</label>
-          <label class="checkbox-item"><input type="checkbox" name="roles" value="Coleta"> Coleta</label>
-          <label class="checkbox-item"><input type="checkbox" name="roles" value="Hellgate"> Hellgate</label>
-          <label class="checkbox-item"><input type="checkbox" name="roles" value="Small Scale"> Small Scale</label>
+        <div class="feature-card">
+          <div class="feature-icon">💳</div>
+          <h3>Pagamento Via Pix</h3>
+          <p>Ativação automática do Plano PRO via Pix Copia e Cola dentro do próprio Discord com o comando <code>/assinar</code>.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <button type="submit" id="submitBtn">Enviar Ficha de Recrutamento</button>
-    </form>
-  </div>
+  <!-- PREÇOS -->
+  <section class="pricing" id="planos">
+    <div class="container">
+      <h2 class="section-title">Escolha o Plano Ideal</h2>
 
-  <script>
-    // URL do seu backend no Render
-    const API_BASE_URL = 'https://bot-recrutador.onrender.com';
+      <div class="grid-pricing">
+        <!-- Grátis -->
+        <div class="price-card">
+          <h3>Plano Gratuito</h3>
+          <div class="price-val">R$ 0 <span>/mês</span></div>
+          <ul class="price-list">
+            <li>Até 15 fichas por mês</li>
+            <li>Aprovação/Recusa via botões</li>
+            <li>Atribuição automática de cargos</li>
+            <li>Link exclusivo para a guilda</li>
+          </ul>
+          <a href="https://discord.com/oauth2/authorize?client_id=1531670595832516618&permissions=2416035856&integration_type=0&scope=bot+applications.commands" target="_blank" class="btn btn-secondary" style="width: 100%;">Começar Grátis</a>
+        </div>
 
-    // Captura o ID da guilda na URL (?guild=ID)
-    const urlParams = new URLSearchParams(window.location.search);
-    const guildId = urlParams.get('guild');
+        <!-- PRO -->
+        <div class="price-card featured">
+          <span class="price-badge">Mais Popular</span>
+          <h3>Plano PRO</h3>
+          <div class="price-val">R$ 19,90 <span>/mês</span></div>
+          <ul class="price-list">
+            <li><strong>Fichas ILIMITADAS</strong></li>
+            <li>Aprovação/Recusa via botões</li>
+            <li>Atribuição automática de cargos</li>
+            <li>Ativação instantânea via Pix</li>
+            <li>Suporte prioritário</li>
+          </ul>
+          <a href="https://discord.com/oauth2/authorize?client_id=1531670595832516618&permissions=2416035856&integration_type=0&scope=bot+applications.commands" target="_blank" class="btn btn-primary" style="width: 100%;">Adicionar & Assinar</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    const form = document.getElementById('recruitForm');
-    const alertBox = document.getElementById('alertBox');
-    const submitBtn = document.getElementById('submitBtn');
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Bot Recrutador Albion - Não afiliado à Sandbox Interactive.</p>
+  </footer>
 
-    // Valida se o link tem o ID da guilda
-    if (!guildId) {
-      showAlert('⚠️ Este formulário é inválido. Peça o link correto ao líder da sua guilda.', 'warning');
-      form.style.display = 'none';
-    }
-
-    function showAlert(text, type) {
-      alertBox.textContent = text;
-      alertBox.className = `message-box ${type}`;
-      alertBox.style.display = 'block';
-    }
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Enviando...';
-      alertBox.style.display = 'none';
-
-      const roles = Array.from(document.querySelectorAll('input[name="roles"]:checked'))
-        .map(cb => cb.value);
-
-      const payload = {
-        guildId: guildId,
-        gameNick: document.getElementById('gameNick').value,
-        discordTag: document.getElementById('discordTag').value,
-        mainWeapon: document.getElementById('mainWeapon').value,
-        weaponSpec: document.getElementById('weaponSpec').value,
-        roles: roles
-      };
-
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/apply`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          showAlert('✅ Ficha enviada com sucesso! Acompanhe o resultado pelo Discord da guilda.', 'success');
-          form.reset();
-        } else if (response.status === 402) {
-          // Trata limite de fichas estourado
-          showAlert('🚫 Esta guilda atingiu o limite de fichas do Plano Gratuito este mês. Peça para um líder usar o comando /assinar no Discord!', 'warning');
-        } else {
-          showAlert(`❌ Erro: ${result.error || 'Não foi possível enviar sua ficha.'}`, 'error');
-        }
-      } catch (err) {
-        console.error(err);
-        showAlert('❌ Erro ao conectar ao servidor. Tente novamente em instantes.', 'error');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Enviar Ficha de Recrutamento';
-      }
-    });
-  </script>
 </body>
 </html>
