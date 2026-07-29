@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recrutamento - Albion Online</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #12131C 0%, #1A1C29 100%);
+      color: #E2E8F0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background: #222636;
+      border: 1px solid #32384D;
+      border-radius: 12px;
+      padding: 30px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      color: #F1C40F;
+      font-size: 24px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    p.subtitle {
+      color: #94A3B8;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #CBD5E1;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 12px;
+      background: #1A1C29;
+      border: 1px solid #32384D;
+      border-radius: 6px;
+      color: #FFF;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus {
+      border-color: #F1C40F;
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: #1A1C29;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #32384D;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: #CBD5E1;
+      cursor: pointer;
+    }
+
+    .checkbox-item input {
+      margin-right: 8px;
+      accent-color: #F1C40F;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #F1C40F;
+      color: #12131C;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #D4AC0D;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .message-box {
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-top: 15px;
+      display: none;
+      text-align: center;
+    }
+
+    .message-box.success {
+      background: rgba(46, 204, 113, 0.2);
+      border: 1px solid #2ECC71;
+      color: #2ECC71;
+    }
+
+    .message-box.error {
+      background: rgba(231, 76, 60, 0.2);
+      border: 1px solid #E74C3C;
+      color: #E74C3C;
+    }
+
+    .message-box.warning {
+      background: rgba(241, 196, 15, 0.2);
+      border: 1px solid #F1C40F;
+      color: #F1C40F;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>⚔️ Recrutamento de Guilda</h1>
+    <p class="subtitle">Preencha sua ficha para se candidatar à guilda</p>
+
+    <div id="alertBox" class="message-box"></div>
+
+    <form id="recruitForm">
+      <div class="form-group">
+        <label for="gameNick">Nick no Albion Online</label>
+        <input type="text" id="gameNick" placeholder="Ex: PlayerOne" required>
+      </div>
+
+      <div class="form-group">
+        <label for="discordTag">Seu User no Discord</label>
+        <input type="text" id="discordTag" placeholder="Ex: usuario_discord" required>
+      </div>
+
+      <div class="form-group">
+        <label for="mainWeapon">Arma Principal</label>
+        <input type="text" id="mainWeapon" placeholder="Ex: Cajado Infernal, Espada Larga..." required>
+      </div>
+
+      <div class="form-group">
+        <label for="weaponSpec">Spec da Arma Principal (0 a 120)</label>
+        <input type="number" id="weaponSpec" min="0" max="120" placeholder="Ex: 100" required>
+      </div>
+
+      <div class="form-group">
+        <label>Atividades de Interesse</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" name="roles" value="ZvZ"> ZvZ</label>
+          <label class="checkbox-item"><input type="checkbox" name="roles" value="Gank"> Gank</label>
+          <label class="checkbox-item"><input type="checkbox" name="roles" value="PvE / DG"> PvE / DG</label>
+          <label class="checkbox-item"><input type="checkbox" name="roles" value="Coleta"> Coleta</label>
+          <label class="checkbox-item"><input type="checkbox" name="roles" value="Hellgate"> Hellgate</label>
+          <label class="checkbox-item"><input type="checkbox" name="roles" value="Small Scale"> Small Scale</label>
+        </div>
+      </div>
+
+      <button type="submit" id="submitBtn">Enviar Ficha de Recrutamento</button>
+    </form>
+  </div>
+
+  <script>
+    // URL do seu backend no Render
+    const API_BASE_URL = 'https://bot-recrutador.onrender.com';
+
+    // Captura o ID da guilda na URL (?guild=ID)
+    const urlParams = new URLSearchParams(window.location.search);
+    const guildId = urlParams.get('guild');
+
+    const form = document.getElementById('recruitForm');
+    const alertBox = document.getElementById('alertBox');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Valida se o link tem o ID da guilda
+    if (!guildId) {
+      showAlert('⚠️ Este formulário é inválido. Peça o link correto ao líder da sua guilda.', 'warning');
+      form.style.display = 'none';
+    }
+
+    function showAlert(text, type) {
+      alertBox.textContent = text;
+      alertBox.className = `message-box ${type}`;
+      alertBox.style.display = 'block';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+      alertBox.style.display = 'none';
+
+      const roles = Array.from(document.querySelectorAll('input[name="roles"]:checked'))
+        .map(cb => cb.value);
+
+      const payload = {
+        guildId: guildId,
+        gameNick: document.getElementById('gameNick').value,
+        discordTag: document.getElementById('discordTag').value,
+        mainWeapon: document.getElementById('mainWeapon').value,
+        weaponSpec: document.getElementById('weaponSpec').value,
+        roles: roles
+      };
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/apply`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          showAlert('✅ Ficha enviada com sucesso! Acompanhe o resultado pelo Discord da guilda.', 'success');
+          form.reset();
+        } else if (response.status === 402) {
+          // Trata limite de fichas estourado
+          showAlert('🚫 Esta guilda atingiu o limite de fichas do Plano Gratuito este mês. Peça para um líder usar o comando /assinar no Discord!', 'warning');
+        } else {
+          showAlert(`❌ Erro: ${result.error || 'Não foi possível enviar sua ficha.'}`, 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        showAlert('❌ Erro ao conectar ao servidor. Tente novamente em instantes.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar Ficha de Recrutamento';
+      }
+    });
+  </script>
+</body>
+</html>
