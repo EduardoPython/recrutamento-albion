@@ -1,268 +1,196 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recrutamento - Albion Online</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background: linear-gradient(135deg, #12131C 0%, #1A1C29 100%);
-      color: #E2E8F0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .container {
-      background: #222636;
-      border: 1px solid #32384D;
-      border-radius: 12px;
-      padding: 30px;
-      width: 100%;
-      max-width: 500px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    }
-
-    h1 {
-      color: #F1C40F;
-      font-size: 24px;
-      margin-bottom: 8px;
-      text-align: center;
-    }
-
-    p.subtitle {
-      color: #94A3B8;
-      font-size: 14px;
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    label {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #CBD5E1;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    select {
-      width: 100%;
-      padding: 12px;
-      background: #1A1C29;
-      border: 1px solid #32384D;
-      border-radius: 6px;
-      color: #FFF;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    input:focus, select:focus {
-      border-color: #F1C40F;
-    }
-
-    .checkbox-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      background: #1A1C29;
-      padding: 12px;
-      border-radius: 6px;
-      border: 1px solid #32384D;
-    }
-
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-      font-size: 13px;
-      color: #CBD5E1;
-      cursor: pointer;
-    }
-
-    .checkbox-item input {
-      margin-right: 8px;
-      accent-color: #F1C40F;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      background: #F1C40F;
-      color: #12131C;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background: #D4AC0D;
-    }
-
-    button:active {
-      transform: scale(0.98);
-    }
-
-    .message-box {
-      padding: 12px;
-      border-radius: 6px;
-      font-size: 14px;
-      margin-top: 15px;
-      display: none;
-      text-align: center;
-    }
-
-    .message-box.success {
-      background: rgba(46, 204, 113, 0.2);
-      border: 1px solid #2ECC71;
-      color: #2ECC71;
-    }
-
-    .message-box.error {
-      background: rgba(231, 76, 60, 0.2);
-      border: 1px solid #E74C3C;
-      color: #E74C3C;
-    }
-
-    .message-box.warning {
-      background: rgba(241, 196, 15, 0.2);
-      border: 1px solid #F1C40F;
-      color: #F1C40F;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recrutamento - Guilda</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            background-color: #1e1e1e;
+            border: 1px solid #2d2d2d;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+        .form-control, .form-select {
+            background-color: #2b2b2b;
+            border: 1px solid #404040;
+            color: #ffffff;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: #2b2b2b;
+            color: #ffffff;
+            border-color: #f1c40f;
+            box-shadow: 0 0 0 0.25rem rgba(241, 196, 15, 0.25);
+        }
+        .btn-primary {
+            background-color: #f1c40f;
+            border-color: #f1c40f;
+            color: #000;
+            font-weight: bold;
+        }
+        .btn-primary:hover {
+            background-color: #d4ac0d;
+            border-color: #d4ac0d;
+            color: #000;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>⚔️ Recrutamento de Guilda</h1>
-    <p class="subtitle">Preencha sua ficha para se candidatar à guilda</p>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="col-md-6 col-lg-5">
+            <div class="card p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold text-warning">⚔️ Recrutamento</h2>
+                    <p class="text-muted">Preencha os dados abaixo para se juntar à nossa guilda</p>
+                </div>
 
-    <div id="alertBox" class="message-box"></div>
+                <form id="applyForm">
+                    <!-- Campo oculto para guardar o ID da Guilda pego pela URL -->
+                    <input type="hidden" id="guildId" name="guildId">
 
-    <form id="recruitForm">
-      <div class="form-group">
-        <label for="gameNick">Nick no Albion Online</label>
-        <input type="text" id="gameNick" placeholder="Ex: PlayerOne" required>
-      </div>
+                    <!-- Nick no Jogo -->
+                    <div class="mb-3">
+                        <label for="gameNick" class="form-label">Seu Nick no Albion</label>
+                        <input type="text" class="form-control" id="gameNick" name="gameNick" placeholder="Ex: NomeDoJogador" required>
+                    </div>
 
-      <div class="form-group">
-        <label for="discordTag">Seu User no Discord</label>
-        <input type="text" id="discordTag" placeholder="Ex: usuario_discord" required>
-      </div>
+                    <!-- Tag do Discord -->
+                    <div class="mb-3">
+                        <label for="discordTag" class="form-label">Seu usuário do Discord</label>
+                        <input type="text" class="form-control" id="discordTag" name="discordTag" placeholder="Ex: seuusuario ou seuusuario#0000" required>
+                    </div>
 
-      <div class="form-group">
-        <label for="mainWeapon">Arma Principal</label>
-        <input type="text" id="mainWeapon" placeholder="Ex: Cajado Infernal, Espada Larga..." required>
-      </div>
+                    <!-- ID do Discord (Opcional, para marcação direta) -->
+                    <div class="mb-3">
+                        <label for="discordUserId" class="form-label">ID do Usuário do Discord <small class="text-muted">(Opcional)</small></label>
+                        <input type="text" class="form-control" id="discordUserId" name="discordUserId" placeholder="Ex: 123456789012345678">
+                    </div>
 
-      <div class="form-group">
-        <label for="weaponSpec">Spec da Arma Principal (0 a 120)</label>
-        <input type="number" id="weaponSpec" min="0" max="120" placeholder="Ex: 100" required>
-      </div>
+                    <!-- Arma Principal (Texto Livre) -->
+                    <div class="mb-3">
+                        <label for="mainWeapon" class="form-label">Qual é a sua Arma Principal?</label>
+                        <input type="text" class="form-control" id="mainWeapon" name="mainWeapon" placeholder="Ex: Cajado do Oculto, Espada Amaldiçoada..." required>
+                    </div>
 
-      <div class="form-group">
-        <label>Atividades de Interesse</label>
-        <div class="checkbox-group">
-          <label class="checkbox-item"><input type="checkbox" name="roles" value="ZvZ"> ZvZ</label>
-          <label class="checkbox-item"><input type="checkbox" name="roles" value="Gank"> Gank</label>
-          <label class="checkbox-item"><input type="checkbox" name="roles" value="PvE / DG"> PvE / DG</label>
-          <label class="checkbox-item"><input type="checkbox" name="roles" value="Coleta"> Coleta</label>
-          <label class="checkbox-item"><input type="checkbox" name="roles" value="Hellgate"> Hellgate</label>
-          <label class="checkbox-item"><input type="checkbox" name="roles" value="Small Scale"> Small Scale</label>
+                    <!-- Checkbox de Novato -->
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="isNewbie" name="isNewbie">
+                        <label class="form-check-label text-light" for="isNewbie">Sou Novato / Iniciante</label>
+                    </div>
+
+                    <!-- Upload da Print de Atributos / Fama -->
+                    <div class="mb-4">
+                        <label for="statsImage" class="form-label">Print dos Atributos / Fama Total (Perfil)</label>
+                        <input type="file" class="form-control" id="statsImage" name="statsImage" accept="image/*" required>
+                        <div class="form-text text-muted">Envie uma imagem legível mostrando sua fama total e atributos.</div>
+                    </div>
+
+                    <!-- Botão de Envio -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">Enviar Ficha</button>
+                    </div>
+                </form>
+
+                <!-- Mensagem de Resposta -->
+                <div id="responseMessage" class="mt-3 text-center"></div>
+            </div>
         </div>
-      </div>
+    </div>
 
-      <button type="submit" id="submitBtn">Enviar Ficha de Recrutamento</button>
-    </form>
-  </div>
+    <!-- Script para capturar o ID da guilda na URL e enviar via API -->
+    <script>
+        // Pega o ID da guilda passado via URL (Ex: form.html?guild=123456789)
+        const urlParams = new URLSearchParams(window.location.search);
+        const guildIdFromUrl = urlParams.get('guild');
 
-  <script>
-    // URL do seu backend no Render
-    const API_BASE_URL = 'https://bot-recrutador.onrender.com';
-
-    // Captura o ID da guilda na URL (?guild=ID)
-    const urlParams = new URLSearchParams(window.location.search);
-    const guildId = urlParams.get('guild');
-
-    const form = document.getElementById('recruitForm');
-    const alertBox = document.getElementById('alertBox');
-    const submitBtn = document.getElementById('submitBtn');
-
-    // Valida se o link tem o ID da guilda
-    if (!guildId) {
-      showAlert('⚠️ Este formulário é inválido. Peça o link correto ao líder da sua guilda.', 'warning');
-      form.style.display = 'none';
-    }
-
-    function showAlert(text, type) {
-      alertBox.textContent = text;
-      alertBox.className = `message-box ${type}`;
-      alertBox.style.display = 'block';
-    }
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Enviando...';
-      alertBox.style.display = 'none';
-
-      const roles = Array.from(document.querySelectorAll('input[name="roles"]:checked'))
-        .map(cb => cb.value);
-
-      const payload = {
-        guildId: guildId,
-        gameNick: document.getElementById('gameNick').value,
-        discordTag: document.getElementById('discordTag').value,
-        mainWeapon: document.getElementById('mainWeapon').value,
-        weaponSpec: document.getElementById('weaponSpec').value,
-        roles: roles
-      };
-
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/apply`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          showAlert('✅ Ficha enviada com sucesso! Acompanhe o resultado pelo Discord da guilda.', 'success');
-          form.reset();
-        } else if (response.status === 402) {
-          // Trata limite de fichas estourado
-          showAlert('🚫 Esta guilda atingiu o limite de fichas do Plano Gratuito este mês. Peça para um líder usar o comando /assinar no Discord!', 'warning');
+        if (guildIdFromUrl) {
+            document.getElementById('guildId').value = guildIdFromUrl;
         } else {
-          showAlert(`❌ Erro: ${result.error || 'Não foi possível enviar sua ficha.'}`, 'error');
+            alert('⚠️ Link de recrutamento inválido! Certifique-se de usar o link gerado pelo comando /setar-canal no Discord.');
         }
-      } catch (err) {
-        console.error(err);
-        showAlert('❌ Erro ao conectar ao servidor. Tente novamente em instantes.', 'error');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Enviar Ficha de Recrutamento';
-      }
-    });
-  </script>
+
+        // Função para converter o arquivo de imagem em Base64
+        const convertFileToBase64 = (file) => {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = (error) => reject(error);
+            });
+        };
+
+        document.getElementById('applyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const responseDiv = document.getElementById('responseMessage');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+            responseDiv.innerHTML = '';
+
+            const gameNick = document.getElementById('gameNick').value;
+            const discordTag = document.getElementById('discordTag').value;
+            const discordUserId = document.getElementById('discordUserId').value;
+            const mainWeapon = document.getElementById('mainWeapon').value;
+            const isNewbie = document.getElementById('isNewbie').checked;
+            const guildId = document.getElementById('guildId').value;
+            const imageFile = document.getElementById('statsImage').files[0];
+
+            let statsImageBase64 = null;
+            if (imageFile) {
+                try {
+                    statsImageBase64 = await convertFileToBase64(imageFile);
+                } catch (err) {
+                    console.error('Erro ao converter imagem:', err);
+                }
+            }
+
+            const payload = {
+                gameNick,
+                discordTag,
+                discordUserId,
+                mainWeapon,
+                isNewbie,
+                guildId,
+                statsImageBase64
+            };
+
+            try {
+                // Altere a URL abaixo caso seu bot esteja hospedado em outro servidor (ex: Render, Railway, etc)
+                const response = await fetch('/api/apply', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    responseDiv.innerHTML = '<div class="alert alert-success">✅ Ficha enviada com sucesso! Verifique seu Discord em breve.</div>';
+                    document.getElementById('applyForm').reset();
+                    if (guildIdFromUrl) document.getElementById('guildId').value = guildIdFromUrl;
+                } else {
+                    responseDiv.innerHTML = `<div class="alert alert-danger">❌ ${result.error || 'Erro ao enviar ficha.'}</div>`;
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                responseDiv.innerHTML = '<div class="alert alert-danger">❌ Erro de conexão com o servidor. Tente novamente mais tarde.</div>';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Enviar Ficha';
+            }
+        });
+    </script>
 </body>
 </html>
